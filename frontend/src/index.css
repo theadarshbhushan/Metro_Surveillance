@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #F4F7FA;
+    color: #1e293b;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .section-label {
+    @apply text-xs font-bold tracking-widest uppercase text-slate-400;
+  }
+
+  .section-title {
+    @apply text-base font-bold text-slate-800 tracking-tight;
+  }
+
+  .card {
+    @apply bg-white rounded-xl border border-slate-200 shadow-sm;
+  }
+
+  .status-low {
+    @apply bg-emerald-50 border-emerald-200 text-emerald-700;
+  }
+
+  .status-moderate {
+    @apply bg-amber-50 border-amber-200 text-amber-700;
+  }
+
+  .status-high {
+    @apply bg-orange-50 border-orange-200 text-orange-700;
+  }
+
+  .status-critical {
+    @apply bg-red-50 border-red-200 text-red-700;
+  }
+
+  .btn-primary {
+    @apply bg-blue-700 hover:bg-blue-800 active:bg-blue-900 text-white font-semibold px-5 py-2.5 rounded-lg transition-all duration-150 shadow-sm hover:shadow-md;
+  }
+
+  .btn-secondary {
+    @apply bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-700 font-medium px-4 py-2.5 rounded-lg border border-slate-200 transition-all duration-150;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Station pulse animation */
+@keyframes station-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.8; }
+}
+.station-pulse {
+  animation: station-pulse 2s ease-in-out infinite;
+}
+
+/* Occupancy bar fill animation */
+@keyframes bar-fill {
+  from { width: 0%; }
+}
+.bar-animate {
+  animation: bar-fill 0.6s ease-out forwards;
+}
+
+/* Recommendation arrow pulse */
+@keyframes arrow-slide {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+.arrow-pulse {
+  animation: arrow-slide 1.5s ease-in-out infinite;
+}
+
+/* Critical badge pulse */
+@keyframes critical-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+}
+.critical-pulse {
+  animation: critical-pulse 2s ease-in-out infinite;
+}
