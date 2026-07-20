@@ -1,0 +1,38 @@
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+
+async function request(path, options = {}) {
+  try {
+    const response = await fetch(`${API_BASE_URL}${path}`, {
+      headers: {
+        Accept: 'application/json',
+        ...(options.headers || {}),
+      },
+      ...options,
+    });
+
+    const data = await response.json().catch(() => null);
+
+    if (!response.ok) {
+      throw new Error(data?.error || data?.message || `Request failed with status ${response.status}`);
+    }
+
+    return data;
+  } catch (error) {
+    if (error instanceof TypeError) {
+      throw new Error('Unable to reach the SmartMetro backend. Please confirm Flask is running on port 5000.');
+    }
+    throw error;
+  }
+}
+
+export function getSimulationState() {
+  return request('/api/simulation/state');
+}
+
+export function advanceSimulation() {
+  return request('/api/simulation/next', { method: 'POST' });
+}
+
+export function resetSimulation() {
+  return request('/api/simulation/reset', { method: 'POST' });
+}

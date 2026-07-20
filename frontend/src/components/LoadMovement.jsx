@@ -36,7 +36,7 @@ export default function LoadMovement({ coaches, station }) {
                 )}
                 {isNeg && (
                   <div
-                    className="absolute right-0 h-full bg-red-400 rounded-full transition-all duration-500"
+                    className="absolute right-0 h-full bg-blue-400 rounded-full transition-all duration-500"
                     style={{ width: `${Math.min((Math.abs(mv) / 40) * 100, 100)}%` }}
                   ></div>
                 )}
@@ -44,7 +44,7 @@ export default function LoadMovement({ coaches, station }) {
 
               {/* Value */}
               <div className={`flex items-center gap-1 w-24 flex-shrink-0 ${
-                isPos ? 'text-emerald-600' : isNeg ? 'text-red-500' : 'text-slate-400'
+                isPos ? 'text-emerald-600' : isNeg ? 'text-blue-600' : 'text-slate-400'
               }`}>
                 {isPos && <ArrowUp className="w-3.5 h-3.5" />}
                 {isNeg && <ArrowDown className="w-3.5 h-3.5" />}
@@ -65,12 +65,12 @@ export default function LoadMovement({ coaches, station }) {
           <div className="text-xs font-black text-emerald-600">+{totalInflow}</div>
           <div className="text-[9px] font-bold tracking-widest uppercase text-emerald-500 mt-0.5">Total Inflow</div>
         </div>
-        <div className="bg-red-50 border border-red-100 rounded-lg p-2.5 text-center">
-          <div className="text-xs font-black text-red-600">-{totalOutflow}</div>
-          <div className="text-[9px] font-bold tracking-widest uppercase text-red-500 mt-0.5">Total Outflow</div>
+        <div className="bg-blue-50 border border-blue-100 rounded-lg p-2.5 text-center">
+          <div className="text-xs font-black text-blue-600">-{totalOutflow}</div>
+          <div className="text-[9px] font-bold tracking-widest uppercase text-blue-500 mt-0.5">Total Outflow</div>
         </div>
         <div className={`border rounded-lg p-2.5 text-center ${netChange >= 0 ? 'bg-slate-50 border-slate-100' : 'bg-slate-50 border-slate-100'}`}>
-          <div className={`text-xs font-black ${netChange > 0 ? 'text-emerald-600' : netChange < 0 ? 'text-red-600' : 'text-slate-500'}`}>
+          <div className={`text-xs font-black ${netChange > 0 ? 'text-emerald-600' : netChange < 0 ? 'text-blue-600' : 'text-slate-500'}`}>
             {netChange > 0 ? '+' : ''}{netChange}
           </div>
           <div className="text-[9px] font-bold tracking-widest uppercase text-slate-400 mt-0.5">Net Change</div>

@@ -1,7 +1,6 @@
 /**
- * densityUtils.js
- * Pure utility functions for density-related colors, labels and styles.
- * Centralised here so no component hardcodes status colors.
+ * Centralized density helpers for colors, labels, movement display, and
+ * aggregate occupancy values derived from backend coach data.
  */
 
 export const DENSITY_CONFIG = {
@@ -63,9 +62,9 @@ export function getOccupancyBarColor(pct) {
 }
 
 export function formatMovement(movement) {
-  if (movement === 0) return { text: '— No change', color: 'text-slate-400', symbol: '—' };
+  if (movement === 0) return { text: '- No change', color: 'text-slate-400', symbol: '-' };
   if (movement > 0) return { text: `+${movement} units`, color: 'text-emerald-600', symbol: '↑' };
-  return { text: `${movement} units`, color: 'text-red-500', symbol: '↓' };
+  return { text: `${movement} units`, color: 'text-blue-600', symbol: '↓' };
 }
 
 export function getOverallDensity(coaches) {

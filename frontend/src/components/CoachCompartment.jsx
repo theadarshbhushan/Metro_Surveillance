@@ -128,7 +128,9 @@ export default function CoachCompartment({ coach, isRecommended, stationName }) 
             <div className="flex justify-between"><span>Status</span><span className={`font-bold ${
               isCritical ? 'text-red-400' : isHigh ? 'text-orange-400' : 'text-amber-400'
             }`}>{coach.density_status}</span></div>
-            <div className="flex justify-between"><span>Movement</span><span className={`font-semibold ${mvt.color === 'text-emerald-600' ? 'text-emerald-400' : 'text-red-400'}`}>{mvt.text}</span></div>
+            <div className="flex justify-between"><span>Movement</span><span className={`font-semibold ${
+              mvt.color === 'text-emerald-600' ? 'text-emerald-400' : mvt.color === 'text-blue-600' ? 'text-blue-400' : 'text-slate-400'
+            }`}>{mvt.text}</span></div>
           </div>
           {/* Arrow */}
           <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900"></div>
