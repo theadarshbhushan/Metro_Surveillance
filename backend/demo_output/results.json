@@ -1,0 +1,260 @@
+{
+  "D1": {
+    "expected": {
+      "seated": 5,
+      "standing": 8,
+      "unknown": 0,
+      "occupied": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5"
+      ]
+    },
+    "got": {
+      "seated": 5,
+      "standing": 8,
+      "unknown": 0,
+      "occupied": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5"
+      ]
+    },
+    "pass": true,
+    "telemetry": {
+      "coach_id": "D1",
+      "timestamp": "2026-10-05T21:41:03",
+      "frame": 12,
+      "total_people": 13,
+      "seated_people": 5,
+      "standing_people": 8,
+      "unknown_people": 0,
+      "occupied_seats": 5,
+      "empty_seats": 0,
+      "uncertain_seats": 0,
+      "max_passengers": 40,
+      "occupancy_percentage": 32.5,
+      "seat_occupancy_percentage": 100.0,
+      "density_status": "LOW",
+      "seats": {
+        "S1": {
+          "status": "OCCUPIED",
+          "track_id": 6
+        },
+        "S2": {
+          "status": "OCCUPIED",
+          "track_id": 12
+        },
+        "S3": {
+          "status": "OCCUPIED",
+          "track_id": 9
+        },
+        "S4": {
+          "status": "OCCUPIED",
+          "track_id": 13
+        },
+        "S5": {
+          "status": "OCCUPIED",
+          "track_id": 2
+        }
+      },
+      "fps": {
+        "capture": 0.0,
+        "inference": 4.55,
+        "telemetry": 0.0
+      }
+    }
+  },
+  "D2": {
+    "expected": {
+      "seated": 8,
+      "standing": 0,
+      "unknown": 0,
+      "occupied": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8"
+      ]
+    },
+    "got": {
+      "seated": 8,
+      "standing": 0,
+      "unknown": 0,
+      "occupied": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8"
+      ]
+    },
+    "pass": true,
+    "telemetry": {
+      "coach_id": "D2",
+      "timestamp": "2026-10-05T21:41:07",
+      "frame": 12,
+      "total_people": 8,
+      "seated_people": 8,
+      "standing_people": 0,
+      "unknown_people": 0,
+      "occupied_seats": 8,
+      "empty_seats": 0,
+      "uncertain_seats": 0,
+      "max_passengers": 40,
+      "occupancy_percentage": 20.0,
+      "seat_occupancy_percentage": 100.0,
+      "density_status": "LOW",
+      "seats": {
+        "S1": {
+          "status": "OCCUPIED",
+          "track_id": 1
+        },
+        "S2": {
+          "status": "OCCUPIED",
+          "track_id": 5
+        },
+        "S3": {
+          "status": "OCCUPIED",
+          "track_id": 3
+        },
+        "S4": {
+          "status": "OCCUPIED",
+          "track_id": 2
+        },
+        "S5": {
+          "status": "OCCUPIED",
+          "track_id": 10
+        },
+        "S6": {
+          "status": "OCCUPIED",
+          "track_id": 4
+        },
+        "S7": {
+          "status": "OCCUPIED",
+          "track_id": 6
+        },
+        "S8": {
+          "status": "OCCUPIED",
+          "track_id": 7
+        }
+      },
+      "fps": {
+        "capture": 0.0,
+        "inference": 4.85,
+        "telemetry": 0.0
+      }
+    }
+  },
+  "D3": {
+    "expected": {
+      "seated": 10,
+      "standing": 1,
+      "unknown": 0,
+      "occupied": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S10"
+      ]
+    },
+    "got": {
+      "seated": 10,
+      "standing": 1,
+      "unknown": 0,
+      "occupied": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S10"
+      ]
+    },
+    "pass": true,
+    "telemetry": {
+      "coach_id": "D3",
+      "timestamp": "2026-10-05T21:41:10",
+      "frame": 12,
+      "total_people": 11,
+      "seated_people": 10,
+      "standing_people": 1,
+      "unknown_people": 0,
+      "occupied_seats": 10,
+      "empty_seats": 0,
+      "uncertain_seats": 0,
+      "max_passengers": 40,
+      "occupancy_percentage": 27.5,
+      "seat_occupancy_percentage": 100.0,
+      "density_status": "LOW",
+      "seats": {
+        "S1": {
+          "status": "OCCUPIED",
+          "track_id": 1
+        },
+        "S2": {
+          "status": "OCCUPIED",
+          "track_id": 2
+        },
+        "S3": {
+          "status": "OCCUPIED",
+          "track_id": 3
+        },
+        "S4": {
+          "status": "OCCUPIED",
+          "track_id": 4
+        },
+        "S5": {
+          "status": "OCCUPIED",
+          "track_id": 7
+        },
+        "S6": {
+          "status": "OCCUPIED",
+          "track_id": 6
+        },
+        "S7": {
+          "status": "OCCUPIED",
+          "track_id": 5
+        },
+        "S8": {
+          "status": "OCCUPIED",
+          "track_id": 8
+        },
+        "S9": {
+          "status": "OCCUPIED",
+          "track_id": 10
+        },
+        "S10": {
+          "status": "OCCUPIED",
+          "track_id": 12
+        }
+      },
+      "fps": {
+        "capture": 0.0,
+        "inference": 4.37,
+        "telemetry": 0.0
+      }
+    }
+  }
+}

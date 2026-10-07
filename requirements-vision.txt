@@ -1,0 +1,7 @@
+# Edge vision node (laptop or Raspberry Pi). Backend deps stay in backend/requirements.txt.
+opencv-python>=4.8.0
+numpy>=1.24
+ultralytics>=8.3.0
+lapx>=0.5.2
+requests>=2.31
+# picamera2 is preinstalled on Raspberry Pi OS (use: sudo apt install python3-picamera2)

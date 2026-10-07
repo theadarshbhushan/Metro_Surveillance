@@ -61,10 +61,10 @@ export function getOccupancyBarColor(pct) {
   return '#ef4444';
 }
 
-export function formatMovement(movement) {
+export function formatMovement(movement, unit = 'units') {
   if (movement === 0) return { text: '- No change', color: 'text-slate-400', symbol: '-' };
-  if (movement > 0) return { text: `+${movement} units`, color: 'text-emerald-600', symbol: '↑' };
-  return { text: `${movement} units`, color: 'text-blue-600', symbol: '↓' };
+  if (movement > 0) return { text: `+${movement} ${unit}`, color: 'text-emerald-600', symbol: '↑' };
+  return { text: `${movement} ${unit}`, color: 'text-blue-600', symbol: '↓' };
 }
 
 export function getOverallDensity(coaches) {

@@ -23,8 +23,17 @@ export default function TrainVisualization({ coaches, recommendation, station })
           <div className="section-title">Coach-Level Crowd Distribution & Available Capacity</div>
         </div>
         <div className="text-[10px] text-slate-400 font-medium text-right">
-          <div>Simulated load units per coach</div>
-          <div className="text-slate-500 font-semibold">Capacity: 100 units per coach</div>
+          {coaches.some((c) => c.source === 'vision') ? (
+            <>
+              <div>Camera-detected people (vision coaches) / simulated load units (others)</div>
+              <div className="text-slate-500 font-semibold">Vision capacity: {coaches.find((c) => c.source === 'vision').capacity} people per coach</div>
+            </>
+          ) : (
+            <>
+              <div>Simulated load units per coach</div>
+              <div className="text-slate-500 font-semibold">Capacity: 100 units per coach</div>
+            </>
+          )}
         </div>
       </div>
 

@@ -36,3 +36,35 @@ export function advanceSimulation() {
 export function resetSimulation() {
   return request('/api/simulation/reset', { method: 'POST' });
 }
+
+// ---------------------------------------------------------------------------
+// Real computer-vision data (Raspberry Pi edge node -> Flask)
+// ---------------------------------------------------------------------------
+export function getHealth() {
+  return request('/api/health');
+}
+
+export function getVisionState() {
+  return request('/api/vision/state');
+}
+
+export function getEvaluation() {
+  return request('/api/vision/evaluation');
+}
+
+export function submitGroundTruth(payload) {
+  return request('/api/vision/ground-truth', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+}
+
+export function clearEvaluation() {
+  return request('/api/vision/evaluation', { method: 'DELETE' });
+}
+
+// Latest annotated snapshot (JPEG) for a coach; `tick` busts the browser cache.
+export function visionFrameUrl(coachId, tick) {
+  return `${API_BASE_URL}/api/vision/frame?coach_id=${encodeURIComponent(coachId)}&t=${tick}`;
+}

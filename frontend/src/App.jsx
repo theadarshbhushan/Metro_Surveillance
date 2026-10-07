@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import useLiveData from './hooks/useLiveData';
 import { advanceSimulation, getSimulationState, resetSimulation } from './services/api';
 
 import Header from './components/Header';
@@ -16,6 +17,7 @@ import SystemPipeline from './components/SystemPipeline';
 import PrototypeInfo from './components/PrototypeInfo';
 import LoadingOverlay from './components/LoadingOverlay';
 import ErrorBanner from './components/ErrorBanner';
+import VisionSection from './components/VisionSection';
 
 export default function App() {
   const [simulationState, setSimulationState] = useState(null);
@@ -39,6 +41,9 @@ export default function App() {
     }
   }, []);
 
+  // Live vision data (polled). The dashboard never talks to the camera or YOLO directly.
+  const { vision, evaluation, offline, refresh: refreshVision } = useLiveData();
+
   const loadInitialState = useCallback(() => {
     runRequest(getSimulationState, 'Loading simulation state');
   }, [runRequest]);
@@ -46,6 +51,22 @@ export default function App() {
   useEffect(() => {
     loadInitialState();
   }, [loadInitialState]);
+
+  // In vision/auto mode the coach values change on their own, so re-read them quietly
+  // (no loading overlay). Plain simulation mode only changes on button presses.
+  const dataSource = simulationState?.data_source;
+  useEffect(() => {
+    if (!dataSource || dataSource === 'simulation') return undefined;
+    const id = setInterval(async () => {
+      try {
+        const data = await getSimulationState();
+        setSimulationState((prev) => ({ ...data, message: prev?.message }));
+      } catch {
+        /* keep last good state; the error banner is for explicit actions */
+      }
+    }, 2000);
+    return () => clearInterval(id);
+  }, [dataSource]);
 
   const handleNext = useCallback(() => {
     runRequest(advanceSimulation, 'Advancing to next station');
@@ -67,6 +88,15 @@ export default function App() {
       <Header onReset={handleReset} disabled={isLoading} />
       <ErrorBanner message={error} onRetry={loadInitialState} disabled={isLoading} />
 
+      {simulationState && !hasDashboardData && (
+        <main className="max-w-[1600px] mx-auto px-4 sm:px-6 py-5 space-y-5">
+          <div className="bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 text-sm font-semibold text-blue-700">
+            {simulationState.message || 'Waiting for coach data.'}
+          </div>
+          <VisionSection vision={vision} evaluation={evaluation} offline={offline} onRefresh={refreshVision} />
+        </main>
+      )}
+
       {hasDashboardData && (
         <>
           <OperationalSummary station={station} coaches={coaches} recommendation={recommendation} />
@@ -80,6 +110,7 @@ export default function App() {
 
             <MetroRoute station={station} />
             <TrainVisualization coaches={coaches} recommendation={recommendation} station={station} />
+            <VisionSection vision={vision} evaluation={evaluation} offline={offline} onRefresh={refreshVision} />
 
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
               <div className="xl:col-span-2">

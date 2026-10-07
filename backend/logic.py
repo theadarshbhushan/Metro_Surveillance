@@ -36,7 +36,7 @@ def recommend_coach(coaches: list) -> dict:
 
     reason = (
         f"Coach {best.id} currently has the highest available capacity "
-        f"({best.available_capacity} kg free, {best.occupancy_percentage}% occupied) "
+        f"({best.available_capacity} {getattr(best, 'unit', 'kg')} free, {best.occupancy_percentage}% occupied) "
         f"and provides the best option for balanced passenger distribution."
     )
 

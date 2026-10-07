@@ -4,9 +4,11 @@ import { getDensityConfig, formatMovement } from '../utils/densityUtils';
 export default function CoachCompartment({ coach, isRecommended, stationName }) {
   const [hovered, setHovered] = useState(false);
   const cfg = getDensityConfig(coach.density_status);
-  const mvt = formatMovement(coach.movement);
   const isCritical = coach.density_status === 'CRITICAL';
   const isHigh = coach.density_status === 'HIGH';
+  const isVision = coach.source === 'vision';
+  const unitLabel = isVision ? 'people' : 'units';
+  const mvt = formatMovement(coach.movement, unitLabel);
 
   // Window count based on coach
   const windows = [1, 2, 3, 4];
@@ -45,6 +47,13 @@ export default function CoachCompartment({ coach, isRecommended, stationName }) 
         }`}>
           <span className="text-[10px] font-black tracking-widest uppercase text-slate-600">
             COACH {coach.id}
+            {isVision && (
+              <span className={`ml-1.5 text-[8px] font-bold tracking-widest px-1.5 py-0.5 rounded-full ${
+                coach.vision?.live ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-500'
+              }`}>
+                {coach.vision?.live ? 'LIVE CV' : 'CV STALE'}
+              </span>
+            )}
           </span>
           <span className={`text-[9px] font-bold tracking-widest px-2 py-0.5 rounded-full border ${cfg.bgColor} ${cfg.borderColor} ${cfg.textColor}`}>
             {coach.density_status}
@@ -105,7 +114,7 @@ export default function CoachCompartment({ coach, isRecommended, stationName }) 
           {/* Movement */}
           <div className={`mt-1.5 flex items-center gap-1 text-[11px] font-bold ${mvt.color}`}>
             <span className="text-base leading-none">{mvt.symbol}</span>
-            <span>{Math.abs(coach.movement)} units</span>
+            <span>{Math.abs(coach.movement)} {unitLabel}</span>
           </div>
         </div>
       </div>
@@ -123,8 +132,8 @@ export default function CoachCompartment({ coach, isRecommended, stationName }) 
           <div className="font-bold mb-1">Coach {coach.id} — {stationName}</div>
           <div className="space-y-0.5 text-slate-300">
             <div className="flex justify-between"><span>Occupancy</span><span className="text-white font-semibold">{coach.occupancy_percentage}%</span></div>
-            <div className="flex justify-between"><span>Load</span><span className="text-white font-semibold">{coach.current_load} units</span></div>
-            <div className="flex justify-between"><span>Available</span><span className="text-emerald-400 font-semibold">{coach.available_capacity} units</span></div>
+            <div className="flex justify-between"><span>Load</span><span className="text-white font-semibold">{coach.current_load} {unitLabel}</span></div>
+            <div className="flex justify-between"><span>Available</span><span className="text-emerald-400 font-semibold">{coach.available_capacity} {unitLabel}</span></div>
             <div className="flex justify-between"><span>Status</span><span className={`font-bold ${
               isCritical ? 'text-red-400' : isHigh ? 'text-orange-400' : 'text-amber-400'
             }`}>{coach.density_status}</span></div>

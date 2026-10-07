@@ -38,6 +38,9 @@ class Coach:
         """Passenger movement since last station (positive = boarded, negative = alighted)."""
         return round(self.current_load - self._previous_load, 1)
 
+    unit = "kg"
+    source = "simulation"
+
     def to_dict(self) -> dict:
         return {
             "id": self.id,
@@ -47,7 +50,40 @@ class Coach:
             "available_capacity": self.available_capacity,
             "density_status": self.density_status,
             "movement": self.movement,
+            "source": self.source,
         }
+
+
+class VisionCoach(Coach):
+    """A coach whose load comes from the camera: load = people, capacity = max passengers.
+    Percentage/density are the values computed from the vision telemetry (people / capacity)."""
+
+    unit = "people"
+    source = "vision"
+
+    def __init__(self, row: dict):
+        super().__init__(row["id"], row["current_load"], row["current_load"] - row.get("movement", 0))
+        self.capacity = row["capacity"]
+        self._pct = row["occupancy_percentage"]
+        self._density = row["density_status"]
+        self.vision = row.get("vision", {})
+
+    @property
+    def occupancy_percentage(self) -> float:
+        return self._pct
+
+    @property
+    def density_status(self) -> str:
+        return self._density
+
+    def to_dict(self) -> dict:
+        d = super().to_dict()
+        d["current_load"] = int(self.current_load)
+        d["movement"] = int(self.movement)
+        d["available_capacity"] = int(self.available_capacity)
+        d["unit"] = self.unit
+        d["vision"] = self.vision
+        return d
 
 
 def build_coaches_from_row(row: dict, previous_row: dict = None) -> list:

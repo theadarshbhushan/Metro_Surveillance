@@ -78,7 +78,7 @@ export default function LoadMovement({ coaches, station }) {
       </div>
 
       <div className="mt-2 text-[9px] text-slate-400 text-center font-medium">
-        Values represent simulated load units — not literal passenger counts
+        Simulated coaches show load units, not passenger counts; coaches marked LIVE CV show detected people
       </div>
     </div>
   );

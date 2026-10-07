@@ -7,13 +7,18 @@ from services.metro_service import build_state_response
 simulation_bp = Blueprint("simulation", __name__, url_prefix="/api/simulation")
 
 
+def _state():
+    return build_state_response(g.simulator, g.vision)
+
+
 @simulation_bp.route("/state", methods=["GET"])
 def get_state():
     """
     GET /api/simulation/state
-    Returns the complete current simulation state without advancing.
+    Returns the complete current state without advancing. Coach values come from the
+    simulation CSV and/or live vision telemetry depending on DATA_SOURCE.
     """
-    return jsonify(build_state_response(g.simulator))
+    return jsonify(_state())
 
 
 @simulation_bp.route("/next", methods=["POST"])
@@ -25,7 +30,7 @@ def next_station():
     includes a message field in the response.
     """
     advanced = g.simulator.advance()
-    state = build_state_response(g.simulator)
+    state = _state()
 
     if not advanced:
         state["message"] = (
@@ -43,6 +48,6 @@ def reset_simulation():
     Resets simulation to Station 1 and returns the initial state.
     """
     g.simulator.reset()
-    state = build_state_response(g.simulator)
+    state = _state()
     state["message"] = "Simulation reset to the first station."
     return jsonify(state)
